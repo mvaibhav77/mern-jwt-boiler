@@ -15,7 +15,7 @@ const authUser = asyncHandler(async (req, res) => {
     res.status(200).json({
       _id: user._id,
       name: user.name,
-      email: user,
+      email: user.email,
     });
   } else {
     res.status(401);
@@ -74,6 +74,7 @@ const logoutUser = asyncHandler(async (req, res) => {
 // @access Private
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = {
+    // req.user is the user authenticated from the token
     _id: req.user._id,
     name: req.user.name,
     email: req.user.email,
@@ -102,7 +103,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       name: updateUser.name,
       email: updateUser.email,
     });
-    
   } else {
     res.status(404);
     throw new Error("User not found");
